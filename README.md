@@ -4,11 +4,13 @@ A React-based portfolio monitoring dashboard with 5/25 band rebalancing recommen
 
 ## Features
 
-- Real-time portfolio monitoring
+- Real-time portfolio monitoring with live stock prices (Alpha Vantage API)
+- Automatic margin debt tracking and equity calculation
 - 5/25 band rebalancing strategy
 - Buy/Sell recommendations based on allocation drift
 - Visual allocation charts (current vs target)
 - Profit/Loss tracking
+- Leverage ratio monitoring
 - Responsive design
 
 ## Rebalancing Strategy
@@ -51,7 +53,7 @@ npm run dev
 Edit `src/data/portfolio.json` to update your holdings. The data structure includes:
 
 **Account Settings:**
-- `accountEquity`: Your account equity (total value minus margin debt)
+- `marginDebt`: Your total margin debt (for margin accounts)
 
 **Holdings:**
 - `code`: Stock/ETF symbol
@@ -68,8 +70,25 @@ If you're using margin, allocations are calculated based on your account equity:
 - Current Allocation = (Holding Value / Account Equity) × 100%
 
 The dashboard automatically calculates:
-- Margin Debt = Total Value - Account Equity
+- Account Equity = Total Value - Margin Debt
 - Leverage Ratio = Total Value / Account Equity
+
+### Setting Up Alpha Vantage API
+
+The dashboard uses Alpha Vantage for real-time stock prices. To enable live prices:
+
+1. Get a free API key from https://www.alphavantage.co/support/#api-key
+2. **For local development:**
+   - Create a `.env` file in the project root
+   - Add: `VITE_ALPHA_VANTAGE_API_KEY=your_actual_api_key_here`
+3. **For GitHub Pages deployment:**
+   - Go to your GitHub repository Settings → Secrets and variables → Actions
+   - Click "New repository secret"
+   - Name: `ALPHA_VANTAGE_API_KEY`
+   - Value: Your actual API key
+   - Push to trigger deployment
+
+**Note:** Alpha Vantage free tier has 25 API calls per day. The dashboard will fall back to mock prices if the limit is reached or if no API key is provided.
 
 ### Building for Production
 
@@ -127,13 +146,18 @@ portfolio-dashboard/
 
 ## Customization
 
-### Stock Price Source
+### Stock Price Updates
 
-By default, the dashboard uses mock prices. To integrate with a real API:
+The dashboard uses Alpha Vantage API for live stock prices. To modify or change the price source:
 
 1. Edit `src/api/stockPrices.js`
-2. Replace `fetchMockPrices` with your preferred API (Alpha Vantage, Yahoo Finance, etc.)
-3. Update the API key and data fetching logic
+2. The `fetchStockPrices` function uses Alpha Vantage's GLOBAL_QUOTE endpoint
+3. You can modify it to use other APIs (Yahoo Finance, IEX Cloud, etc.)
+
+**Price Update Frequency:**
+- Prices are fetched when the dashboard loads
+- Refresh the page to get the latest prices
+- For GitHub Pages, prices update each time you push new code
 
 ### Styling
 
