@@ -15,18 +15,21 @@ const Dashboard = () => {
     const loadData = async () => {
       try {
         setLoading(true);
-        
+
         const symbols = portfolioData.holdings.map(h => h.code);
         const currentPrices = fetchMockPrices(symbols);
-        
+
         const totalValue = portfolioData.holdings.reduce((sum, h) => {
           return sum + (h.actualQuantity * currentPrices[h.code]);
         }, 0);
 
+        const accountEquity = portfolioData.accountEquity || totalValue;
+
         const processedData = calculateRebalancing(
           portfolioData.holdings,
           currentPrices,
-          totalValue
+          totalValue,
+          accountEquity
         );
 
         setHoldings(processedData);
@@ -54,6 +57,9 @@ const Dashboard = () => {
   const totalTargetValue = holdings.reduce((sum, h) => sum + h.targetValue, 0);
   const totalProfit = holdings.reduce((sum, h) => sum + h.profitLoss, 0);
   const needsRebalance = holdings.some(h => h.needsRebalancing);
+  const accountEquity = portfolioData.accountEquity || totalCurrentValue;
+  const marginDebt = totalCurrentValue - accountEquity;
+  const leverageRatio = totalCurrentValue / accountEquity;
 
   if (loading) {
     return <div className="loading">Loading portfolio data...</div>;
@@ -69,8 +75,17 @@ const Dashboard = () => {
         <h1>Portfolio Dashboard</h1>
         <div className="summary-cards">
           <div className="summary-card">
+            <h3>Account Equity</h3>
+            <p className="value">{formatCurrency(accountEquity)}</p>
+          </div>
+          <div className="summary-card">
             <h3>Total Value</h3>
             <p className="value">{formatCurrency(totalCurrentValue)}</p>
+          </div>
+          <div className="summary-card">
+            <h3>Margin Debt</h3>
+            <p className="value">{formatCurrency(marginDebt)}</p>
+            <small>Leverage: {leverageRatio.toFixed(2)}x</small>
           </div>
           <div className="summary-card">
             <h3>Total Target</h3>

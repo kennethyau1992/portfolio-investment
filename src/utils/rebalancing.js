@@ -1,20 +1,22 @@
-export const calculateRebalancing = (holdings, currentPrices, totalPortfolioValue) => {
+export const calculateRebalancing = (holdings, currentPrices, totalPortfolioValue, accountEquity) => {
+  const marginDebt = totalPortfolioValue - accountEquity;
+
   return holdings.map(holding => {
     const currentPrice = currentPrices[holding.code] || holding.buyingPrice;
     const currentValue = holding.actualQuantity * currentPrice;
     const buyingValue = holding.actualQuantity * holding.buyingPrice;
-    const targetValue = totalPortfolioValue * (holding.targetAllocation / 100);
-    const currentAllocation = (currentValue / totalPortfolioValue) * 100;
-    
+    const targetValue = accountEquity * (holding.targetAllocation / 100);
+    const currentAllocation = (currentValue / accountEquity) * 100;
+
     const absoluteDifference = currentAllocation - holding.targetAllocation;
     const relativeDifference = Math.abs(absoluteDifference / holding.targetAllocation) * 100;
-    
+
     const needsRebalancing =
       Math.abs(absoluteDifference) >= 5 || relativeDifference >= 25;
-    
+
     const quantityDifference = Math.round((targetValue - currentValue) / currentPrice);
     const action = quantityDifference > 0 ? 'BUY' : quantityDifference < 0 ? 'SELL' : 'HOLD';
-    
+
     return {
       ...holding,
       currentPrice,

@@ -60,6 +60,13 @@ body {
   color: #1a1a1a;
 }
 
+.summary-card small {
+  display: block;
+  margin-top: 5px;
+  font-size: 0.8em;
+  color: #666;
+}
+
 .summary-card.positive {
   border-left-color: #00C49F;
 }
