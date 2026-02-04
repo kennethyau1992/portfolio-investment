@@ -387,3 +387,190 @@ body {
     padding: 8px 4px;
   }
 }
+
+.bucket-summary {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+}
+
+.bucket-summary h2 {
+  color: #1a1a1a;
+  margin-bottom: 20px;
+  font-size: 1.5em;
+}
+
+.bucket-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 20px;
+}
+
+.bucket-card {
+  background: #f8f9fa;
+  padding: 25px;
+  border-radius: 12px;
+  border-left: 5px solid #0088FE;
+  transition: all 0.3s;
+}
+
+.bucket-card.needs-rebalance {
+  border-left-color: #FFBB28;
+  background: #fffbf0;
+}
+
+.bucket-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.bucket-name {
+  color: #1a1a1a;
+  margin-bottom: 5px;
+  font-size: 1.3em;
+  font-weight: bold;
+}
+
+.bucket-description {
+  color: #666;
+  font-size: 0.9em;
+  margin-bottom: 20px;
+  font-style: italic;
+}
+
+.bucket-metrics {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.bucket-metrics .metric {
+  display: flex;
+  flex-direction: column;
+}
+
+.bucket-metrics .label {
+  font-size: 0.8em;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 5px;
+}
+
+.bucket-metrics .value {
+  font-size: 1.1em;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.bucket-metrics .value.high {
+  color: #FF4444;
+}
+
+.bucket-metrics .value.low {
+  color: #00C49F;
+}
+
+.bucket-metrics .value.positive {
+  color: #00C49F;
+}
+
+.bucket-metrics .value.negative {
+  color: #FF4444;
+}
+
+.bucket-status {
+  text-align: center;
+  padding: 15px;
+  border-radius: 8px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 1em;
+}
+
+.bucket-status.warning {
+  background: #FFBB28;
+  color: #1a1a1a;
+}
+
+.bucket-status.ok {
+  background: #00C49F;
+  color: white;
+}
+
+.bucket-action {
+  text-align: center;
+  margin-top: 15px;
+  padding: 12px;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.bucket-action.BUY {
+  background: #00C49F;
+  color: white;
+}
+
+.bucket-action.SELL {
+  background: #FF4444;
+  color: white;
+}
+
+.bucket-action.HOLD {
+  background: #e0e0e0;
+  color: #666;
+}
+
+.summary-card small.bucket-note,
+.summary-card small.fine-tune-note {
+  display: block;
+  margin-top: 5px;
+  font-size: 0.75em;
+  color: #666;
+  font-style: italic;
+}
+
+.portfolio-table .bucket-cell {
+  min-width: 120px;
+}
+
+.portfolio-table .bucket-cell small {
+  display: block;
+  font-size: 0.85em;
+  color: #666;
+  margin-top: 3px;
+}
+
+.portfolio-table tr.needs-fine-tune {
+  background: #fff7e0;
+}
+
+.portfolio-table .action-cell small.trade-reason {
+  display: block;
+  font-size: 0.8em;
+  color: #666;
+  font-style: italic;
+  margin-top: 3px;
+}
+
+.portfolio-table .action-cell .hold {
+  color: #999;
+  font-style: italic;
+}
+
+.portfolio-table .percent-cell small {
+  display: block;
+  font-size: 0.8em;
+  color: #666;
+  margin-top: 2px;
+}
+
+.portfolio-table .percent-cell small.warning {
+  color: #FF4444;
+  font-weight: 600;
+}

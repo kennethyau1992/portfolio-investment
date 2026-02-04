@@ -1,13 +1,15 @@
-// Portfolio Dashboard with margin account equity support
+// Portfolio Dashboard with bucket-level rebalancing and fine-tuning
 import React, { useState, useEffect } from 'react';
 import PortfolioTable from './PortfolioTable';
+import BucketSummary from './BucketSummary';
 import AllocationChart from './AllocationChart';
-import { calculateRebalancing } from '../utils/rebalancing';
+import { calculateBucketRebalancing } from '../utils/bucketRebalancing';
 import { fetchStockPrices } from '../api/stockPrices';
 import portfolioData from '../data/portfolio.json';
 
 const Dashboard = () => {
   const [holdings, setHoldings] = useState([]);
+  const [buckets, setBuckets] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [chartMode, setChartMode] = useState('current');
@@ -27,14 +29,16 @@ const Dashboard = () => {
         const marginDebt = portfolioData.marginDebt || 0;
         const accountEquity = totalValue - marginDebt;
 
-        const processedData = calculateRebalancing(
+        const result = calculateBucketRebalancing(
           portfolioData.holdings,
           currentPrices,
-          totalValue,
-          accountEquity
+          accountEquity,
+          portfolioData.buckets,
+          portfolioData.fineTuneThreshold || 3
         );
 
-        setHoldings(processedData);
+        setHoldings(result.holdings);
+        setBuckets(result.buckets);
         setLoading(false);
       } catch (err) {
         console.error('Error loading portfolio data:', err);
@@ -58,10 +62,12 @@ const Dashboard = () => {
   const totalCurrentValue = holdings.reduce((sum, h) => sum + h.currentValue, 0);
   const totalTargetValue = holdings.reduce((sum, h) => sum + h.targetValue, 0);
   const totalProfit = holdings.reduce((sum, h) => sum + h.profitLoss, 0);
-  const needsRebalance = holdings.some(h => h.needsRebalancing);
+  const needsRebalance = holdings.some(h => h.needsFineTuning);
+  const needsBucketRebalance = Object.values(buckets).some(b => b.needsRebalancing);
   const marginDebt = portfolioData.marginDebt || 0;
   const accountEquity = totalCurrentValue - marginDebt;
   const leverageRatio = accountEquity > 0 ? totalCurrentValue / accountEquity : 1;
+  const fineTuneThreshold = portfolioData.fineTuneThreshold || 3;
 
   if (loading) {
     return <div className="loading">Loading portfolio data...</div>;
@@ -97,9 +103,13 @@ const Dashboard = () => {
             <h3>Profit/Loss</h3>
             <p className="value">{formatCurrency(totalProfit)}</p>
           </div>
-          <div className={`summary-card ${needsRebalance ? 'warning' : 'ok'}`}>
+          <div className={`summary-card ${(needsRebalance || needsBucketRebalance) ? 'warning' : 'ok'}`}>
             <h3>Rebalance Status</h3>
-            <p className="value">{needsRebalance ? 'Needed' : 'OK'}</p>
+            <p className="value">
+              {(needsRebalance || needsBucketRebalance) ? 'Needed' : 'OK'}
+              {needsBucketRebalance && !needsRebalance && <small className="bucket-note">(Bucket)</small>}
+              {!needsBucketRebalance && needsRebalance && <small className="fine-tune-note">(Fine-Tune)</small>}
+            </p>
           </div>
         </div>
       </header>
@@ -122,17 +132,26 @@ const Dashboard = () => {
         <AllocationChart data={holdings} mode={chartMode} />
       </div>
 
+      <BucketSummary buckets={buckets} />
+
       <div className="table-section">
         <h2>Portfolio Holdings</h2>
-        <PortfolioTable data={holdings} />
+        <PortfolioTable data={holdings} fineTuneThreshold={fineTuneThreshold} />
       </div>
 
       <div className="info-section">
-        <h3>Rebalancing Strategy: 5/25 Band Rule</h3>
+        <h3>Two-Tier Rebalancing Strategy</h3>
+        <h4>Bucket-Level Rebalancing (5/25 Band)</h4>
         <ul>
-          <li>Absolute 5%: If allocation drifts by ±5 percentage points, rebalance</li>
-          <li>Relative 25%: If allocation drifts by ±25% of its target, rebalance</li>
-          <li>The more restrictive band is applied</li>
+          <li>Equity Bucket: 70% target, Rebalance if outside 65-75%</li>
+          <li>Alternatives Bucket: 60% target, Rebalance if outside 55-65%</li>
+          <li>Sell overweight, buy underweight within bucket</li>
+        </ul>
+        <h4>Fine-Tuning (Alternatives Only)</h4>
+        <ul>
+          <li>Only if bucket is in band</li>
+          <li>Trigger if individual sleeve drifts by {fineTuneThreshold}% absolute</li>
+          <li>Alt bucket funds: Fine-tune if allocation outside 7-13% range</li>
         </ul>
       </div>
     </div>
