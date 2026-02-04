@@ -30,12 +30,12 @@ The dashboard uses a sophisticated two-tier rebalancing approach:
   - Rebalance if outside 55-65% range
   - Sell overweight, buy underweight within alternatives bucket
 
-### Tier 2: Fine-Tuning (Alternatives Only)
+### Tier 2: Fine-Tuning
 
+- Applies to holdings with individual fine-tune thresholds (AVGV, Alt bucket funds)
+- **AVGV**: Fine-tune if allocation drifts by ±5% absolute (target 50%, so 45-55% range)
+- **Alternative Funds**: Fine-tune if allocation drifts by ±3% absolute (target 10%, so 7-13% range)
 - Only applies if bucket is within its 5/25 band
-- Trigger if individual alternative fund drifts by ±3% absolute
-- Alternatives funds: Fine-tune if allocation <7% or >13%
-- Does not apply to Equity bucket holdings
 - **Relative 25%**: If allocation drifts by ±25% of its target, rebalance
 - The more restrictive band is applied
 
@@ -80,6 +80,7 @@ Edit `src/data/portfolio.json` to update your holdings. The data structure inclu
 - `buyingPrice`: Average purchase price
 - `targetQuantity`: Target quantity based on current value
 - `actualQuantity`: Current quantity held
+- `fineTuneThreshold` (optional): Individual fine-tune threshold in % (e.g., 5 for AVGV)
 
 **Margin Accounts:**
 If you're using margin, allocations are calculated based on your account equity:
