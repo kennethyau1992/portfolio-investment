@@ -60,17 +60,33 @@ export const calculateBucketRebalancing = (holdings, currentPrices, accountEquit
     if (bucketInfo.needsRebalancing) {
       tradeReason = 'Bucket Rebalance';
 
-      if (bucketInfo.action === 'SELL') {
+      const bucketOverweight = bucketInfo.currentAllocation > bucketInfo.targetAllocation;
+      const otherBucketId = bucketId === 'equity' ? 'alt' : 'equity';
+      const otherBucketInfo = bucketAnalysis[otherBucketId];
+
+      if (bucketOverweight) {
         if (absoluteDiff > 0) {
           tradeAction = 'SELL';
           quantityToTrade = Math.round((holding.currentValue - targetValue) / holding.currentPrice);
           tradeValue = holding.currentValue - targetValue;
+        } else if (absoluteDiff < 0 && otherBucketInfo && !otherBucketInfo.needsRebalancing) {
+          if (otherBucketInfo.currentAllocation < otherBucketInfo.targetAllocation) {
+            tradeAction = 'BUY';
+            quantityToTrade = Math.round((targetValue - holding.currentValue) / holding.currentPrice);
+            tradeValue = targetValue - holding.currentValue;
+          }
         }
-      } else if (bucketInfo.action === 'BUY') {
+      } else {
         if (absoluteDiff < 0) {
           tradeAction = 'BUY';
           quantityToTrade = Math.round((targetValue - holding.currentValue) / holding.currentPrice);
           tradeValue = targetValue - holding.currentValue;
+        } else if (absoluteDiff > 0 && otherBucketInfo && !otherBucketInfo.needsRebalancing) {
+          if (otherBucketInfo.currentAllocation > otherBucketInfo.targetAllocation) {
+            tradeAction = 'SELL';
+            quantityToTrade = Math.round((holding.currentValue - targetValue) / holding.currentPrice);
+            tradeValue = holding.currentValue - targetValue;
+          }
         }
       }
     } else if (bucketId === 'alt') {
@@ -141,3 +157,4 @@ export const getBucketBands = (targetAllocation) => {
     lowerBand: Math.max(lowerAbsolute, lowerRelative)
   };
 };
+
