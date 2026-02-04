@@ -1,4 +1,4 @@
-// Portfolio Dashboard with bucket-level rebalancing and fine-tuning
+// Portfolio Dashboard with bucket-level rebalancing, cross-bucket trades, and per-holding fine-tune thresholds
 import React, { useState, useEffect } from 'react';
 import PortfolioTable from './PortfolioTable';
 import BucketSummary from './BucketSummary';
