@@ -1,3 +1,4 @@
+// Portfolio Dashboard with margin account equity support
 import React, { useState, useEffect } from 'react';
 import PortfolioTable from './PortfolioTable';
 import AllocationChart from './AllocationChart';
