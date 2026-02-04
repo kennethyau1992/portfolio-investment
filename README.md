@@ -50,12 +50,26 @@ npm run dev
 
 Edit `src/data/portfolio.json` to update your holdings. The data structure includes:
 
+**Account Settings:**
+- `accountEquity`: Your account equity (total value minus margin debt)
+
+**Holdings:**
 - `code`: Stock/ETF symbol
 - `name`: Full name of the holding
 - `targetAllocation`: Target allocation percentage
 - `buyingPrice`: Average purchase price
 - `targetQuantity`: Target quantity based on current value
 - `actualQuantity`: Current quantity held
+
+**Margin Accounts:**
+If you're using margin, allocations are calculated based on your account equity:
+- Total Value = Sum of all holdings' current market value
+- Account Equity = Total Value - Margin Debt
+- Current Allocation = (Holding Value / Account Equity) × 100%
+
+The dashboard automatically calculates:
+- Margin Debt = Total Value - Account Equity
+- Leverage Ratio = Total Value / Account Equity
 
 ### Building for Production
 
