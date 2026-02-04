@@ -6,18 +6,36 @@ A React-based portfolio monitoring dashboard with 5/25 band rebalancing recommen
 
 - Real-time portfolio monitoring with live stock prices (Alpha Vantage API)
 - Automatic margin debt tracking and equity calculation
-- 5/25 band rebalancing strategy
+- Two-tier rebalancing strategy (bucket-level + fine-tuning)
 - Buy/Sell recommendations based on allocation drift
 - Visual allocation charts (current vs target)
 - Profit/Loss tracking
 - Leverage ratio monitoring
+- Bucket-level analysis for Equity and Alternatives
 - Responsive design
 
 ## Rebalancing Strategy
 
-The dashboard uses the 5/25 band rule:
+The dashboard uses a sophisticated two-tier rebalancing approach:
 
-- **Absolute 5%**: If allocation drifts by ±5 percentage points, rebalance
+### Tier 1: Bucket-Level Rebalancing (5/25 Band)
+
+- **Equity Bucket** (AVGV, HFEQ, ENDW):
+  - Target: 70% of equity
+  - Rebalance if outside 65-75% range
+  - Sell overweight, buy underweight within equity bucket
+
+- **Alternatives Bucket** (HFGM, AVRE, HFMF, CTA, KMLM):
+  - Target: 60% of equity
+  - Rebalance if outside 55-65% range
+  - Sell overweight, buy underweight within alternatives bucket
+
+### Tier 2: Fine-Tuning (Alternatives Only)
+
+- Only applies if bucket is within its 5/25 band
+- Trigger if individual alternative fund drifts by ±3% absolute
+- Alternatives funds: Fine-tune if allocation <7% or >13%
+- Does not apply to Equity bucket holdings
 - **Relative 25%**: If allocation drifts by ±25% of its target, rebalance
 - The more restrictive band is applied
 
