@@ -89,21 +89,25 @@ export const calculateBucketRebalancing = (holdings, currentPrices, accountEquit
           }
         }
       }
-    } else if (bucketId === 'alt') {
-      needsFineTuning = Math.abs(absoluteDiff) >= fineTuneThreshold;
+    } else {
+      const holdingThreshold = holding.fineTuneThreshold !== undefined ? holding.fineTuneThreshold : fineTuneThreshold;
 
-      if (needsFineTuning) {
-        tradeReason = 'Fine-Tune';
-        const quantityDiff = Math.round((targetValue - holding.currentValue) / holding.currentPrice);
+      if (holdingThreshold !== undefined) {
+        needsFineTuning = Math.abs(absoluteDiff) >= holdingThreshold;
 
-        if (quantityDiff > 0) {
-          tradeAction = 'BUY';
-          quantityToTrade = Math.abs(quantityDiff);
-          tradeValue = Math.abs(quantityDiff * holding.currentPrice);
-        } else if (quantityDiff < 0) {
-          tradeAction = 'SELL';
-          quantityToTrade = Math.abs(quantityDiff);
-          tradeValue = Math.abs(quantityDiff * holding.currentPrice);
+        if (needsFineTuning) {
+          tradeReason = 'Fine-Tune';
+          const quantityDiff = Math.round((targetValue - holding.currentValue) / holding.currentPrice);
+
+          if (quantityDiff > 0) {
+            tradeAction = 'BUY';
+            quantityToTrade = Math.abs(quantityDiff);
+            tradeValue = Math.abs(quantityDiff * holding.currentPrice);
+          } else if (quantityDiff < 0) {
+            tradeAction = 'SELL';
+            quantityToTrade = Math.abs(quantityDiff);
+            tradeValue = Math.abs(quantityDiff * holding.currentPrice);
+          }
         }
       }
     }
@@ -129,9 +133,9 @@ export const calculateBucketRebalancing = (holdings, currentPrices, accountEquit
       tradeReason,
       upperBand: bucketInfo.upperBand,
       lowerBand: bucketInfo.lowerBand,
-      fineTuneThreshold,
-      fineTuneUpper: holding.targetAllocation + fineTuneThreshold,
-      fineTuneLower: Math.max(0, holding.targetAllocation - fineTuneThreshold)
+      fineTuneThreshold: holding.fineTuneThreshold !== undefined ? holding.fineTuneThreshold : fineTuneThreshold,
+      fineTuneUpper: holding.targetAllocation + (holding.fineTuneThreshold !== undefined ? holding.fineTuneThreshold : fineTuneThreshold),
+      fineTuneLower: Math.max(0, holding.targetAllocation - (holding.fineTuneThreshold !== undefined ? holding.fineTuneThreshold : fineTuneThreshold))
     };
   });
 
@@ -157,4 +161,3 @@ export const getBucketBands = (targetAllocation) => {
     lowerBand: Math.max(lowerAbsolute, lowerRelative)
   };
 };
-

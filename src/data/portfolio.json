@@ -19,6 +19,7 @@
       "name": "Avantis All Equity Markets Value ETF",
       "targetAllocation": 50.00,
       "bucket": "equity",
+      "fineTuneThreshold": 5.00,
       "buyingPrice": 79.89,
       "targetQuantity": 2568,
       "actualQuantity": 2590,
