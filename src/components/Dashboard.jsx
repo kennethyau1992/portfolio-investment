@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import PortfolioTable from './PortfolioTable';
 import AllocationChart from './AllocationChart';
 import { calculateRebalancing } from '../utils/rebalancing';
-import { fetchMockPrices } from '../api/stockPrices';
+import { fetchStockPrices } from '../api/stockPrices';
 import portfolioData from '../data/portfolio.json';
 
 const Dashboard = () => {
@@ -18,13 +18,14 @@ const Dashboard = () => {
         setLoading(true);
 
         const symbols = portfolioData.holdings.map(h => h.code);
-        const currentPrices = fetchMockPrices(symbols);
+        const currentPrices = await fetchStockPrices(symbols);
 
         const totalValue = portfolioData.holdings.reduce((sum, h) => {
           return sum + (h.actualQuantity * currentPrices[h.code]);
         }, 0);
 
-        const accountEquity = portfolioData.accountEquity || totalValue;
+        const marginDebt = portfolioData.marginDebt || 0;
+        const accountEquity = totalValue - marginDebt;
 
         const processedData = calculateRebalancing(
           portfolioData.holdings,
@@ -58,9 +59,9 @@ const Dashboard = () => {
   const totalTargetValue = holdings.reduce((sum, h) => sum + h.targetValue, 0);
   const totalProfit = holdings.reduce((sum, h) => sum + h.profitLoss, 0);
   const needsRebalance = holdings.some(h => h.needsRebalancing);
-  const accountEquity = portfolioData.accountEquity || totalCurrentValue;
-  const marginDebt = totalCurrentValue - accountEquity;
-  const leverageRatio = totalCurrentValue / accountEquity;
+  const marginDebt = portfolioData.marginDebt || 0;
+  const accountEquity = totalCurrentValue - marginDebt;
+  const leverageRatio = accountEquity > 0 ? totalCurrentValue / accountEquity : 1;
 
   if (loading) {
     return <div className="loading">Loading portfolio data...</div>;

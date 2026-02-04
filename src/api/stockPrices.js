@@ -1,4 +1,4 @@
-const ALPHA_VANTAGE_API_KEY = 'demo';
+const ALPHA_VANTAGE_API_KEY = import.meta.env.VITE_ALPHA_VANTAGE_API_KEY || 'demo';
 
 export const fetchStockPrices = async (symbols) => {
   const prices = {};
