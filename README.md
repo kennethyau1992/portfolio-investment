@@ -1,0 +1,130 @@
+# Portfolio Dashboard
+
+A React-based portfolio monitoring dashboard with 5/25 band rebalancing recommendations.
+
+## Features
+
+- Real-time portfolio monitoring
+- 5/25 band rebalancing strategy
+- Buy/Sell recommendations based on allocation drift
+- Visual allocation charts (current vs target)
+- Profit/Loss tracking
+- Responsive design
+
+## Rebalancing Strategy
+
+The dashboard uses the 5/25 band rule:
+
+- **Absolute 5%**: If allocation drifts by ±5 percentage points, rebalance
+- **Relative 25%**: If allocation drifts by ±25% of its target, rebalance
+- The more restrictive band is applied
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js 18 or higher
+- npm or yarn
+
+### Installation
+
+1. Clone the repository:
+```bash
+git clone <your-repo-url>
+cd portfolio-dashboard
+```
+
+2. Install dependencies:
+```bash
+npm install
+```
+
+3. Start the development server:
+```bash
+npm run dev
+```
+
+4. Open your browser to `http://localhost:5173`
+
+### Updating Portfolio Data
+
+Edit `src/data/portfolio.json` to update your holdings. The data structure includes:
+
+- `code`: Stock/ETF symbol
+- `name`: Full name of the holding
+- `targetAllocation`: Target allocation percentage
+- `buyingPrice`: Average purchase price
+- `targetQuantity`: Target quantity based on current value
+- `actualQuantity`: Current quantity held
+
+### Building for Production
+
+```bash
+npm run build
+```
+
+The built files will be in the `dist` directory.
+
+## Deployment to GitHub Pages
+
+This project is configured for automatic deployment to GitHub Pages.
+
+### Initial Setup
+
+1. Push this repository to GitHub
+2. Go to your repository Settings > Pages
+3. Under "Source", select "GitHub Actions"
+4. Push changes to trigger the deployment
+
+The workflow in `.github/workflows/deploy.yml` will automatically deploy your app to GitHub Pages.
+
+### Manual Deployment
+
+Alternatively, you can deploy manually:
+
+```bash
+npm run deploy
+```
+
+## Project Structure
+
+```
+portfolio-dashboard/
+├── src/
+│   ├── api/
+│   │   └── stockPrices.js      # API integration for fetching prices
+│   ├── components/
+│   │   ├── Dashboard.jsx       # Main dashboard component
+│   │   ├── PortfolioTable.jsx  # Holdings table with recommendations
+│   │   └── AllocationChart.jsx # Pie chart for allocation visualization
+│   ├── data/
+│   │   └── portfolio.json      # Your portfolio data
+│   ├── utils/
+│   │   └── rebalancing.js      # 5/25 band rebalancing logic
+│   ├── App.jsx
+│   ├── App.css
+│   └── index.css
+├── public/
+├── .github/workflows/
+│   └── deploy.yml              # GitHub Actions deployment workflow
+├── package.json
+└── vite.config.js
+```
+
+## Customization
+
+### Stock Price Source
+
+By default, the dashboard uses mock prices. To integrate with a real API:
+
+1. Edit `src/api/stockPrices.js`
+2. Replace `fetchMockPrices` with your preferred API (Alpha Vantage, Yahoo Finance, etc.)
+3. Update the API key and data fetching logic
+
+### Styling
+
+All styles are in `src/App.css`. Modify to customize colors, fonts, and layout.
+
+## License
+
+MIT

@@ -1,0 +1,76 @@
+{
+  "holdings": [
+    {
+      "code": "AVGV",
+      "name": "Avantis All Equity Markets Value ETF",
+      "targetAllocation": 50.00,
+      "buyingPrice": 79.89,
+      "targetQuantity": 2568,
+      "actualQuantity": 2590,
+      "buySellAction": -22
+    },
+    {
+      "code": "HFEQ",
+      "name": "Unlimited HFEQ Equity Long/Short ETF",
+      "targetAllocation": 10.00,
+      "buyingPrice": 22.44,
+      "targetQuantity": 1828,
+      "actualQuantity": 1815,
+      "buySellAction": 13
+    },
+    {
+      "code": "ENDW",
+      "name": "Cambria Endowment Style ETF",
+      "targetAllocation": 10.00,
+      "buyingPrice": 32.58,
+      "targetQuantity": 1259,
+      "actualQuantity": 1247,
+      "buySellAction": 12
+    },
+    {
+      "code": "HFGM",
+      "name": "Unlimited HFGM Global Macro ETF",
+      "targetAllocation": 20.00,
+      "buyingPrice": 32.56,
+      "targetQuantity": 2520,
+      "actualQuantity": 2460,
+      "buySellAction": 60
+    },
+    {
+      "code": "AVRE",
+      "name": "Avantis Real Estate ETF",
+      "targetAllocation": 10.00,
+      "buyingPrice": 45.16,
+      "targetQuantity": 908,
+      "actualQuantity": 940,
+      "buySellAction": -32
+    },
+    {
+      "code": "HFMF",
+      "name": "Unlimited HFMF Managed Futures ETF",
+      "targetAllocation": 10.00,
+      "buyingPrice": 22.73,
+      "targetQuantity": 1805,
+      "actualQuantity": 1801,
+      "buySellAction": 4
+    },
+    {
+      "code": "CTA",
+      "name": "Simplify Managed Futures Strategy ETF",
+      "targetAllocation": 10.00,
+      "buyingPrice": 28.20,
+      "targetQuantity": 1455,
+      "actualQuantity": 1429,
+      "buySellAction": 26
+    },
+    {
+      "code": "KMLM",
+      "name": "KraneShares Mount Lucas Managed Futures Ix Str ETF",
+      "targetAllocation": 10.00,
+      "buyingPrice": 26.60,
+      "targetQuantity": 1542,
+      "actualQuantity": 1537,
+      "buySellAction": 5
+    }
+  ]
+}
