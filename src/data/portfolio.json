@@ -1,15 +1,15 @@
 {
-  "marginDebt": 123072.83,
+  "marginDebt": 216635.20,
   "buckets": {
     "equity": {
       "name": "Equity",
       "targetAllocation": 70.00,
-      "description": "Equity Market Exposure (AVGV, HFEQ, ENDW)"
+      "description": "Equity Market Exposure (AVGV, HFEQ)"
     },
     "alt": {
       "name": "Alternatives",
-      "targetAllocation": 60.00,
-      "description": "Alternative Strategies (HFGM, AVRE, HFMF, CTA, KMLM)"
+      "targetAllocation": 80.00,
+      "description": "Alternative Strategies (HFGM, HFMF, CTA, KMLM)"
     }
   },
   "fineTuneThreshold": 3.00,
@@ -20,80 +20,60 @@
       "targetAllocation": 50.00,
       "bucket": "equity",
       "fineTuneThreshold": 5.00,
-      "buyingPrice": 79.89,
-      "targetQuantity": 2568,
+      "buyingPrice": 80.18,
+      "targetQuantity": 0,
       "actualQuantity": 2590,
-      "buySellAction": -22
+      "buySellAction": 0
     },
     {
       "code": "HFEQ",
       "name": "Unlimited HFEQ Equity Long/Short ETF",
-      "targetAllocation": 10.00,
+      "targetAllocation": 20.00,
       "bucket": "equity",
-      "buyingPrice": 22.44,
-      "targetQuantity": 1828,
-      "actualQuantity": 1815,
-      "buySellAction": 13
-    },
-    {
-      "code": "ENDW",
-      "name": "Cambria Endowment Style ETF",
-      "targetAllocation": 10.00,
-      "bucket": "equity",
-      "buyingPrice": 32.58,
-      "targetQuantity": 1259,
-      "actualQuantity": 1247,
-      "buySellAction": 12
+      "buyingPrice": 22.69,
+      "targetQuantity": 0,
+      "actualQuantity": 3600,
+      "buySellAction": 0
     },
     {
       "code": "HFGM",
       "name": "Unlimited HFGM Global Macro ETF",
       "targetAllocation": 20.00,
       "bucket": "alt",
-      "buyingPrice": 32.56,
-      "targetQuantity": 2520,
-      "actualQuantity": 2460,
-      "buySellAction": 60
-    },
-    {
-      "code": "AVRE",
-      "name": "Avantis Real Estate ETF",
-      "targetAllocation": 10.00,
-      "bucket": "alt",
-      "buyingPrice": 45.16,
-      "targetQuantity": 908,
-      "actualQuantity": 940,
-      "buySellAction": -32
+      "buyingPrice": 33.08,
+      "targetQuantity": 0,
+      "actualQuantity": 2500,
+      "buySellAction": 0
     },
     {
       "code": "HFMF",
       "name": "Unlimited HFMF Managed Futures ETF",
-      "targetAllocation": 10.00,
+      "targetAllocation": 20.00,
       "bucket": "alt",
-      "buyingPrice": 22.73,
-      "targetQuantity": 1805,
-      "actualQuantity": 1801,
-      "buySellAction": 4
+      "buyingPrice": 22.98,
+      "targetQuantity": 0,
+      "actualQuantity": 3600,
+      "buySellAction": 0
     },
     {
       "code": "CTA",
       "name": "Simplify Managed Futures Strategy ETF",
-      "targetAllocation": 10.00,
+      "targetAllocation": 20.00,
       "bucket": "alt",
-      "buyingPrice": 28.20,
-      "targetQuantity": 1455,
-      "actualQuantity": 1429,
-      "buySellAction": 26
+      "buyingPrice": 28.43,
+      "targetQuantity": 0,
+      "actualQuantity": 2900,
+      "buySellAction": 0
     },
     {
       "code": "KMLM",
       "name": "KraneShares Mount Lucas Managed Futures Ix Str ETF",
-      "targetAllocation": 10.00,
+      "targetAllocation": 20.00,
       "bucket": "alt",
-      "buyingPrice": 26.60,
-      "targetQuantity": 1542,
-      "actualQuantity": 1537,
-      "buySellAction": 5
+      "buyingPrice": 26.47,
+      "targetQuantity": 0,
+      "actualQuantity": 3000,
+      "buySellAction": 0
     }
   ]
 }
