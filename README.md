@@ -20,21 +20,21 @@ The dashboard uses a sophisticated two-tier rebalancing approach:
 
 ### Tier 1: Bucket-Level Rebalancing (5/25 Band)
 
-- **Equity Bucket** (AVGV, HFEQ, ENDW):
+- **Equity Bucket** (AVGV, HFEQ):
   - Target: 70% of equity
   - Rebalance if outside 65-75% range
   - Sell overweight, buy underweight within equity bucket
 
-- **Alternatives Bucket** (HFGM, AVRE, HFMF, CTA, KMLM):
-  - Target: 60% of equity
-  - Rebalance if outside 55-65% range
+- **Alternatives Bucket** (HFGM, HFMF, CTA, KMLM):
+  - Target: 80% of equity
+  - Rebalance if outside 75-85% range
   - Sell overweight, buy underweight within alternatives bucket
 
 ### Tier 2: Fine-Tuning
 
 - Applies to holdings with individual fine-tune thresholds (AVGV, Alt bucket funds)
 - **AVGV**: Fine-tune if allocation drifts by ±5% absolute (target 50%, so 45-55% range)
-- **Alternative Funds**: Fine-tune if allocation drifts by ±3% absolute (target 10%, so 7-13% range)
+- **Alternative Funds**: Fine-tune if allocation drifts by ±3% absolute (target 20%, so 17-23% range)
 - Only applies if bucket is within its 5/25 band
 - **Relative 25%**: If allocation drifts by ±25% of its target, rebalance
 - The more restrictive band is applied
