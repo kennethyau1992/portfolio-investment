@@ -1,5 +1,5 @@
 {
-  "marginDebt": 216635.20,
+  "marginDebt": 0,
   "buckets": {
     "equity": {
       "name": "Equity",
@@ -19,9 +19,9 @@
       "name": "State Street SPDR MSCI World StrategicFactors ETF",
       "targetAllocation": 30.00,
       "bucket": "equity",
-      "buyingPrice": 80.18,
-      "targetQuantity": 0,
-      "actualQuantity": 2590,
+      "buyingPrice": 149.96,
+      "targetQuantity": 810,
+      "actualQuantity": 810,
       "buySellAction": 0
     },
     {
@@ -29,70 +29,70 @@
       "name": "Unlimited HFEQ Equity Long/Short ETF",
       "targetAllocation": 10.00,
       "bucket": "equity",
-      "buyingPrice": 22.69,
-      "targetQuantity": 0,
-      "actualQuantity": 3600,
-      "buySellAction": 0
+      "buyingPrice": 22.78,
+      "targetQuantity": 1778,
+      "actualQuantity": 1765,
+      "buySellAction": 13
     },
     {
       "code": "DEHP",
       "name": "DFA Dimensional Emerging Mkts High Profitability ETF",
       "targetAllocation": 10.00,
       "bucket": "equity",
-      "buyingPrice": 0.00,
-      "targetQuantity": 0,
-      "actualQuantity": 0,
-      "buySellAction": 0
+      "buyingPrice": 35.80,
+      "targetQuantity": 1131,
+      "actualQuantity": 1128,
+      "buySellAction": 3
     },
     {
       "code": "ASGM",
       "name": "Virtus AlphaSimplex Global Macro ETF",
       "targetAllocation": 10.00,
       "bucket": "alt",
-      "buyingPrice": 0.00,
-      "targetQuantity": 0,
-      "actualQuantity": 0,
-      "buySellAction": 0
+      "buyingPrice": 28.49,
+      "targetQuantity": 1422,
+      "actualQuantity": 1415,
+      "buySellAction": 7
     },
     {
       "code": "HFGM",
       "name": "Unlimited HFGM Global Macro ETF",
       "targetAllocation": 10.00,
       "bucket": "alt",
-      "buyingPrice": 33.08,
-      "targetQuantity": 0,
-      "actualQuantity": 2500,
-      "buySellAction": 0
+      "buyingPrice": 32.75,
+      "targetQuantity": 1237,
+      "actualQuantity": 1218,
+      "buySellAction": 19
     },
     {
       "code": "HFMF",
       "name": "Unlimited HFMF Managed Futures ETF",
       "targetAllocation": 10.00,
       "bucket": "alt",
-      "buyingPrice": 22.98,
-      "targetQuantity": 0,
-      "actualQuantity": 3600,
-      "buySellAction": 0
+      "buyingPrice": 23.10,
+      "targetQuantity": 1753,
+      "actualQuantity": 1749,
+      "buySellAction": 4
     },
     {
       "code": "CEF",
       "name": "Sprott Physical Gold and Silver Trust",
       "targetAllocation": 10.00,
       "bucket": "alt",
-      "buyingPrice": 0.00,
-      "targetQuantity": 0,
-      "actualQuantity": 0,
-      "buySellAction": 0
+      "buyingPrice": 50.39,
+      "targetQuantity": 804,
+      "actualQuantity": 795,
+      "buySellAction": 9
     },
     {
       "code": "KMLM",
       "name": "KraneShares Mount Lucas Managed Futures Ix Str ETF",
       "targetAllocation": 10.00,
       "bucket": "alt",
-      "buyingPrice": 26.47,
-      "targetQuantity": 0,
-      "actualQuantity": 3000,
-      "buySellAction": 0
+      "buyingPrice": 26.64,
+      "targetQuantity": 1520,
+      "actualQuantity": 1515,
+      "buySellAction": 5
     }
   ]
 }
