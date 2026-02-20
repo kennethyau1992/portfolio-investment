@@ -29,13 +29,13 @@ export const fetchStockPrices = async (symbols) => {
 
 export const fetchMockPrices = (symbols) => {
   const mockPrices = {
-    'AVGV': 79.87,
+    'QWLD': 55.00,
     'HFEQ': 22.50,
-    'ENDW': 32.55,
+    'DEHP': 35.00,
+    'ASGM': 28.00,
     'HFGM': 32.64,
-    'AVRE': 45.16,
     'HFMF': 22.70,
-    'CTA': 28.34,
+    'CEF': 18.00,
     'KMLM': 26.61
   };
   

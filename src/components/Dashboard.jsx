@@ -143,15 +143,14 @@ const Dashboard = () => {
         <h3>Two-Tier Rebalancing Strategy</h3>
         <h4>Bucket-Level Rebalancing (5/25 Band)</h4>
         <ul>
-          <li>Equity Bucket: 70% target, Rebalance if outside 65-75%</li>
-          <li>Alternatives Bucket: 80% target, Rebalance if outside 75-85%</li>
+          <li>Equity Bucket (50% target): QWLD, HFEQ, DEHP — Rebalance if outside 45-55%</li>
+          <li>Alternatives Bucket (50% target): ASGM, HFGM, HFMF, CEF, KMLM — Rebalance if outside 45-55%</li>
           <li>Sell overweight, buy underweight within bucket</li>
         </ul>
-        <h4>Fine-Tuning (Alternatives Only)</h4>
+        <h4>Fine-Tuning</h4>
         <ul>
           <li>Only if bucket is in band</li>
-          <li>Trigger if individual sleeve drifts by {fineTuneThreshold}% absolute</li>
-          <li>Alt bucket funds: Fine-tune if allocation outside 17-23% range</li>
+          <li>Trigger if individual holding drifts by {fineTuneThreshold}% absolute</li>
         </ul>
       </div>
     </div>
